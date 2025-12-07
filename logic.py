@@ -56,7 +56,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             else:
                 raise ValueError
             attempts = int(self.attemptEntry.text())
-            print(name,attempts)
+
         except:
             self.messageLabel.setStyleSheet("color: blue")
             self.messageLabel.setText('Enter valid name and number of attempts')
@@ -130,10 +130,10 @@ class Logic(QMainWindow, Ui_MainWindow):
                     self.scoreFourLabel.show()
                     self.scoreFourEntry.show()
 
-                    scoreOne_4 = self.scoreOneEntry.text()
-                    scoreTwo_4 = self.scoreTwoEntry.text()
-                    scoreThree_4 = self.scoreThreeEntry.text()
-                    scoreFour_4 = self.scoreFourEntry.text()
+                    scoreOne_4 = int(self.scoreOneEntry.text())
+                    scoreTwo_4 = int(self.scoreTwoEntry.text())
+                    scoreThree_4 = int(self.scoreThreeEntry.text())
+                    scoreFour_4 = int(self.scoreFourEntry.text())
 
                     scores = [scoreOne_4, scoreTwo_4, scoreThree_4, scoreFour_4]
                     self.range(scores)
@@ -153,7 +153,7 @@ class Logic(QMainWindow, Ui_MainWindow):
             if not (0 <= num <= 100):
                 raise IndexError(self.messageLabel.text('NUM MUST BE BETWEEN 0 and 100'))
 
-    def file(self, info1)->:
+    def file(self, info1)->None:
         """
         method to append the grading info to a csv file
         :param info1:
@@ -167,7 +167,7 @@ class Logic(QMainWindow, Ui_MainWindow):
 
 
 
-    def reset(self)->:
+    def reset(self)->None:
         """
         method to reset the entire application and csv file in case of error when entering grades
         :return:
