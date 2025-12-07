@@ -4,8 +4,17 @@ from logging import exception
 from PyQt6.QtWidgets import *
 from gui import *
 
+
 class Logic(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    """
+    class that sets up the main window of the grading application
+    """
+    def __init__(self)->None:
+        """
+        method that sets up the main window of the grading application
+        hides every label and entry line until called in later methods
+        opens a file ready for input
+        """
         super().__init__()
         self.setFixedSize(294, 351)
         self.setupUi(self)
@@ -32,7 +41,12 @@ class Logic(QMainWindow, Ui_MainWindow):
         writer.writerow(header)
 
 
-    def submit(self):
+    def submit(self)->None:
+        """
+        method to submit each student and their grade results
+        throws exceptions if invalid input is entered
+        :return:
+        """
         self.submitButton.hide()
         self.submitButton_2.show()
         try:
@@ -129,12 +143,22 @@ class Logic(QMainWindow, Ui_MainWindow):
             except:
                     self.messageLabel.setText('Scores must be numeric and within 0-99')
 
-    def range(self, numbers):
+    def range(self, numbers)->None:
+        """
+        method to ensure that the grade entered is within the correct range
+        :param numbers
+
+        """
         for num in numbers:
             if not (0 <= num <= 100):
                 raise IndexError(self.messageLabel.text('NUM MUST BE BETWEEN 0 and 100'))
 
-    def file(self, info1):
+    def file(self, info1)->:
+        """
+        method to append the grading info to a csv file
+        :param info1:
+        :return:
+        """
         with open('grades.csv', 'a') as f:
             writer = csv.writer(f)
             writer.writerow(info1)
@@ -143,7 +167,11 @@ class Logic(QMainWindow, Ui_MainWindow):
 
 
 
-    def reset(self):
+    def reset(self)->:
+        """
+        method to reset the entire application and csv file in case of error when entering grades
+        :return:
+        """
         self.submitButton_2.hide()
         self.submitButton.show()
         self.studentEntry.clear()
